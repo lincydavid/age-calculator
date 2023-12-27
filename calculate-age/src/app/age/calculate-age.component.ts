@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-calc-age',
@@ -24,14 +24,25 @@ export class CalacAgeComponent implements OnInit {
     this.ageDays = null;;
     this.ageCalculateFormGroup = this.fb.group(
       {
-        day: ['', Validators.required],
-        month: ['', Validators.required],
-        year: ['', Validators.required]
+        day: ['', [Validators.required,Validators.min(1),Validators.max(31)]],
+        month: ['', [Validators.required,Validators.min(1),Validators.max(12)]],
+        year: ['', [Validators.required, this.yearValidator]]
       }
     )
   }
   ngOnInit(): void {
 
+  }
+  yearValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const currentYear = new Date().getFullYear();
+    const enteredYear = control.value;
+
+    // Validate that the entered year is within a reasonable range
+    if (enteredYear && (enteredYear < 1900 || enteredYear > currentYear)) {
+      return { 'invalidYear': true };
+    }
+
+    return null; // Validation passed
   }
   onSubmit(value: any) {
     console.log(this.ageCalculateFormGroup.value)

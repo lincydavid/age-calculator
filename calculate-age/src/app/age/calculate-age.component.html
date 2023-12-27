@@ -12,8 +12,9 @@
       <div class="row mb-2 px-5 py-4">
 
         <div class="row head-font">
-          <div class="col-md-1"><label for="month">MONTH</label></div>
           <div class="col-md-1"> <label for="day">DAY</label></div>
+          <div class="col-md-1"><label for="month">MONTH</label></div>
+
           <div class="col-md-1"> <label for="year">YEAR</label></div>
         </div>
 
@@ -22,12 +23,24 @@
           <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('required')">
             <small>Field is required.</small>
           </div>
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('min')">
+            <small>Minimum allowed value is 1</small>
+          </div>
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('max')">
+            <small>Maximum allowed value is 31</small>
+          </div>
         </div>
 
         <div class="col-md-1">
           <input type="number" placeholder="MM" id="month" class="form-control  text-box" formControlName="month">
           <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('required')">
             <small>Field is required.</small>
+          </div>
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('min')">
+            <small>Minimum allowed value is 1</small>
+          </div>
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('max')">
+            <small>Maximum allowed value is 12</small>
           </div>
         </div>
 
@@ -36,12 +49,15 @@
           <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('required')">
             <small>Field is required.</small>
           </div>
+          <div *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('invalidYear')">
+            <small class="text-danger">Please enter a valid birth year.</small>
+          </div>
         </div>
       </div>
       <div class="row button-align">
         <div class="col-md-4">
           <button type="submit" class="form-control text-box custom-button ">
-            <img src="assets/img_67944.png" width="30" height="30"alt="Image Button"></button>
+            <img src="assets/img_67944.png" width="30" height="30" alt="Image Button"></button>
           <hr />
         </div>
       </div>
