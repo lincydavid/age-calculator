@@ -1,0 +1,68 @@
+<html>
+
+<head>
+  Age Calculator
+</head>
+
+<body>
+  <form [formGroup]="ageCalculateFormGroup" (ngSubmit)="onSubmit(ageCalculateFormGroup.value)" class="form-horizontal">
+
+    <div class="row px-2 py-2">
+
+      <div class="row mb-2 px-5 py-4">
+
+        <div class="row head-font">
+          <div class="col-md-1"><label for="month">MONTH</label></div>
+          <div class="col-md-1"> <label for="day">DAY</label></div>
+          <div class="col-md-1"> <label for="year">YEAR</label></div>
+        </div>
+
+        <div class="col-md-1">
+          <input type="number" placeholder="DD" id="day" class="form-control text-box" formControlName="day">
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('required')">
+            <small>Field is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-1">
+          <input type="number" placeholder="MM" id="month" class="form-control  text-box" formControlName="month">
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('required')">
+            <small>Field is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-1">
+          <input type="number" placeholder="YYYY" id="year" class="form-control  text-box" formControlName="year">
+          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('required')">
+            <small>Field is required.</small>
+          </div>
+        </div>
+      </div>
+      <div class="row button-align">
+        <div class="col-md-4">
+          <button type="submit" class="form-control text-box custom-button ">
+            <img src="assets/img_67944.png" width="30" height="30"alt="Image Button"></button>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row-parent px-5 py-4">
+        <div class="col-md-12">
+          <label class="text-primary">{{ageYears ? ageYears : '--'}}</label>
+          <strong>years</strong>
+        </div>
+        <div class="col-md-12">
+          <label class="text-primary">{{ageMonths? ageMonths :'--'}}</label>
+          <strong>months</strong>
+        </div>
+        <div class="col-md-12">
+          <label class="text-primary">{{ageDays ?ageDays : '--' }}</label>
+          <strong>days</strong>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</body>
+
+</html>
