@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 
-import { SharedModule } from 'src/shared/validation-error/shared.module';
 import { AgeModule } from './age/age.module';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { AgeModule } from './age/age.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    SharedModule,
     AgeModule
   ],
   providers: [],

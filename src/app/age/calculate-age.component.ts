@@ -11,17 +11,13 @@ export class CalacAgeComponent {
 
   ageCalculateFormGroup: FormGroup;
   invalidForm: boolean;
-  ageYears: any;
-  ageMonths: any;
-  ageDays: any;
-  error: string;
+  ageYears = 0;
+  ageMonths = 0;
+  ageDays = 0;
+  error = '';
 
   constructor(private fb: FormBuilder) {
     this.invalidForm = false
-    this.error = '';
-    this.ageYears = null;
-    this.ageMonths = null;
-    this.ageDays = null;;
     this.ageCalculateFormGroup = this.fb.group(
       {
         day: ['', [Validators.required, Validators.min(1), Validators.max(31)]],
@@ -48,8 +44,6 @@ export class CalacAgeComponent {
       this.ageMonths = this.ageCalculateFormGroup.value.month;
       this.ageDays = this.ageCalculateFormGroup.value.day;
 
-      const today: Date = new Date();
-
       if (this.ageDays && this.ageMonths && this.ageYears) {
 
         const today = new Date();
@@ -74,8 +68,5 @@ export class CalacAgeComponent {
     } else {
       this.invalidForm = true;
     }
-  }
-  calledME(){
-    console.log('hii')
   }
 }
