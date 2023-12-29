@@ -67,6 +67,7 @@ export class CalacAgeComponent {
       this.invalidForm = false;
     } else {
       this.invalidForm = true;
+      this.ageCalculateFormGroup.reset();
     }
   }
 }
