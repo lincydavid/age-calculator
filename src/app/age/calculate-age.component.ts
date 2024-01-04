@@ -34,8 +34,6 @@ export class CalacAgeComponent {
       this.day?.setValidators([Validators.required, Validators.min(1), Validators.max(this.daysToValidate ? this.daysToValidate : 0)]);
       this.day?.updateValueAndValidity();
     })
-    
-    
   }
 
   get day() {
