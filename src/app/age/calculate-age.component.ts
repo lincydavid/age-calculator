@@ -36,19 +36,42 @@ export class CalacAgeComponent {
     return null;
   }
 
+  validateDaysForFeb() {
+    if (this.ageDays && this.ageMonths) {
+      const enteredDay = this.ageDays;
+      const enteredMonth = this.ageMonths;
+      const expectedDays = this.validateFebruaryDays();
+      if (enteredMonth && (enteredMonth === 2 && enteredDay > expectedDays)) {
+        console.log('expected days ',expectedDays)
+        this.ageCalculateFormGroup.get(['day'])?.clearValidators()
+        this.ageCalculateFormGroup.get(['day'])?.setValidators([Validators.required,Validators.min(1),Validators.max(expectedDays)]);
+        this.ageCalculateFormGroup.get(['day'])?.updateValueAndValidity();
+        this.ageCalculateFormGroup.get(['day'])?.markAsTouched()
+        this.invalidForm = true;
+        this.ageYears = 0;
+        this.ageMonths = 0;
+        this.ageDays = 0;
+      }
+    }
+  }
+
+
+
   onSubmit() {
-
     if (this.ageCalculateFormGroup.valid) {
-
+      this.invalidForm = false;
       this.ageYears = this.ageCalculateFormGroup.value.year;
       this.ageMonths = this.ageCalculateFormGroup.value.month;
       this.ageDays = this.ageCalculateFormGroup.value.day;
-
+      this.validateDaysForFeb();
+      // this.ageYears = 0;
+      // this.ageMonths = 0;
+      // this.ageDays = 0;
       if (this.ageDays && this.ageMonths && this.ageYears) {
 
         const today = new Date();
         const birthDate = new Date(this.ageYears, this.ageMonths - 1, this.ageDays); // Months are zero-based
-
+       
         this.ageYears = today.getFullYear() - birthDate.getFullYear();
         this.ageMonths = today.getMonth() - birthDate.getMonth();
         this.ageDays = today.getDate() - birthDate.getDate();
@@ -63,11 +86,23 @@ export class CalacAgeComponent {
           this.ageYears--;
           this.ageMonths += 12;
         }
+      } else{
+        this.ageYears = 0;
+        this.ageMonths = 0;
+        this.ageDays = 0;
       }
-      this.invalidForm = false;
     } else {
       this.invalidForm = true;
-      this.ageCalculateFormGroup.reset();
     }
+  }
+  validateFebruaryDays(){
+    if (this.isLeapYear(this.ageYears)) {
+      return 29;  // February has 29 days in a leap year
+    } else {
+      return 28;  // February has 28 days in a common year
+    }
+  }
+  private isLeapYear(year: number): boolean {
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
   }
 }

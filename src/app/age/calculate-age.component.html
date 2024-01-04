@@ -1,36 +1,37 @@
 <html>
 
-<head>
-  Age Calculator
-</head>
+<head>Age Calculator</head>
 
 <body>
   <form [formGroup]="ageCalculateFormGroup" class="form-horizontal">
-
     <div class="row px-2 py-2">
-
       <div class="row mb-2 px-5 py-4">
-
         <div class="row head-font">
           <div class="col-md-1"> <label for="day">DAY</label></div>
           <div class="col-md-1"><label for="month">MONTH</label></div>
-
           <div class="col-md-1"> <label for="year">YEAR</label></div>
         </div>
-
         <div class="col-md-1">
-          <input type="number" placeholder="DD" id="day" [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['day'])?.hasError('required') ||
-          ageCalculateFormGroup.get(['day'])?.hasError('min') || ageCalculateFormGroup.get(['day'])?.hasError('max'))}"
+          <input type="number" placeholder="DD" id="day"
+            [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['day'])?.hasError('required') ||
+          ageCalculateFormGroup.get(['day'])?.hasError('min') || ageCalculateFormGroup.get(['day'])?.hasError('max') ||  ageCalculateFormGroup.get(['day'])?.hasError('invalidDays'))}"
             class="form-control text-box" formControlName="day">
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('required')">
-            <small>This field is required.</small>
-          </div>
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('min')">
-            <small>Must be a valid day!</small>
-          </div>
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('max')">
-            <small>Must be a valid day!</small>
-          </div>
+          <ng-container
+            *ngIf="ageCalculateFormGroup.get(['day'])?.invalid && (ageCalculateFormGroup.get(['day'])?.dirty || ageCalculateFormGroup.get(['day'])?.touched)">
+
+            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('required')">
+              <small class="text-danger">This field is required.</small>
+            </div>
+            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('min')">
+              <small class="text-danger">Must be a valid day!</small>
+            </div>
+            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('max')">
+              <small class="text-danger">Must be a valid day!</small>
+            </div>
+            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('invalidDays')">
+              <small class="text-danger">Must be a valid day!</small>
+            </div>
+          </ng-container>
         </div>
 
         <div class="col-md-1">
@@ -38,28 +39,33 @@
             [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['month'])?.hasError('required') ||
           ageCalculateFormGroup.get(['month'])?.hasError('min') || ageCalculateFormGroup.get(['month'])?.hasError('max'))}" class="form-control  text-box"
             formControlName="month">
-
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('required')">
-            <small>This field is required.</small>
-          </div>
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('min')">
-            <small>Must be a valid month!</small>
-          </div>
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('max')">
-            <small>Must be a valid month!</small>
-          </div>
+          <ng-container
+            *ngIf="ageCalculateFormGroup.get(['month'])?.invalid && (ageCalculateFormGroup.get(['month'])?.dirty || ageCalculateFormGroup.get(['month'])?.touched)">
+            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('required')">
+              <small>This field is required.</small>
+            </div>
+            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('min')">
+              <small>Must be a valid month!</small>
+            </div>
+            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('max')">
+              <small>Must be a valid month!</small>
+            </div>
+          </ng-container>
         </div>
 
         <div class="col-md-1">
           <input type="number" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['year'])?.hasError('required') ||
          ageCalculateFormGroup.get(['year'])?.hasError('invalidYear'))}" class="form-control  text-box"
             formControlName="year">
-          <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('required')">
-            <small>This field is required.</small>
-          </div>
-          <div *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('invalidYear')">
-            <small class="text-danger">Must be a valid year!</small>
-          </div>
+          <ng-container
+            *ngIf="ageCalculateFormGroup.get(['year'])?.invalid && (ageCalculateFormGroup.get(['year'])?.dirty || ageCalculateFormGroup.get(['year'])?.touched)">
+            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('required')">
+              <small>This field is required.</small>
+            </div>
+            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('invalidYear')">
+              <small class="text-danger">Must be a valid year!</small>
+            </div>
+          </ng-container>
         </div>
       </div>
       <div class="row button-align">
@@ -81,15 +87,10 @@
                   fill="#8650fe" />
               </svg>
             </ng-container>
-
-
             <div class="simple-line"></div>
           </div>
-
         </div>
-
       </div>
-
       <div class="row-parent px-5 py-4">
         <div class="col-md-12">
           <label class="myColor"><strong>{{ageYears ? ageYears : '--'}}</strong></label>
