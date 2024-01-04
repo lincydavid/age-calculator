@@ -3,7 +3,7 @@
 <head>Age Calculator</head>
 
 <body>
-  <form [formGroup]="ageCalculateFormGroup" class="form-horizontal">
+  <form [formGroup]="formGroup" class="form-horizontal">
     <div class="row px-2 py-2">
       <div class="row mb-2 px-5 py-4">
         <div class="row head-font">
@@ -12,59 +12,61 @@
           <div class="col-md-1"> <label for="year">YEAR</label></div>
         </div>
         <div class="col-md-1">
-          <input type="number" placeholder="DD" id="day"
-            [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['day'])?.hasError('required') ||
-          ageCalculateFormGroup.get(['day'])?.hasError('min') || ageCalculateFormGroup.get(['day'])?.hasError('max') ||  ageCalculateFormGroup.get(['day'])?.hasError('invalidDays'))}"
+          <input type="number" placeholder="DD" id="day" [ngClass]="{'border-danger': invalidForm && (day?.hasError('required') ||
+          day?.hasError('min') || day?.hasError('max') ||  day?.hasError('invalidDays'))}"
             class="form-control text-box" formControlName="day">
-          <ng-container
-            *ngIf="ageCalculateFormGroup.get(['day'])?.invalid && (ageCalculateFormGroup.get(['day'])?.dirty || ageCalculateFormGroup.get(['day'])?.touched)">
 
-            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('required')">
+          <ng-container *ngIf="day?.invalid && (day?.dirty || day?.touched)">
+
+            <div *ngIf="invalidForm && day?.hasError('required')">
               <small class="text-danger">This field is required.</small>
             </div>
-            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('min')">
+            <div *ngIf="invalidForm && day?.hasError('min')">
               <small class="text-danger">Must be a valid day!</small>
             </div>
-            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('max')">
+            <div *ngIf="invalidForm && day?.hasError('max')">
               <small class="text-danger">Must be a valid day!</small>
             </div>
-            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['day'])?.hasError('invalidDays')">
+            <div *ngIf="invalidForm && day?.hasError('invalidDays')">
               <small class="text-danger">Must be a valid day!</small>
             </div>
+
+          </ng-container>
+
+        </div>
+
+        <div class="col-md-1">
+          <input type="number" placeholder="MM" id="month" [ngClass]="{'border-danger': invalidForm && (month?.hasError('required') ||
+          month?.hasError('min') || month?.hasError('max'))}" class="form-control  text-box" formControlName="month">
+        
+        <ng-container *ngIf="month?.invalid && (month?.dirty || month?.touched)">
+
+            <div class="text-danger" *ngIf="invalidForm && month?.hasError('required')">
+              <small>This field is required.</small>
+            </div>
+            <div class="text-danger" *ngIf="invalidForm && month?.hasError('min')">
+              <small>Must be a valid month!</small>
+            </div>
+            <div class="text-danger" *ngIf="invalidForm && month?.hasError('max')">
+              <small>Must be a valid month!</small>
+            </div>
+
           </ng-container>
         </div>
 
         <div class="col-md-1">
-          <input type="number" placeholder="MM" id="month"
-            [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['month'])?.hasError('required') ||
-          ageCalculateFormGroup.get(['month'])?.hasError('min') || ageCalculateFormGroup.get(['month'])?.hasError('max'))}" class="form-control  text-box"
-            formControlName="month">
-          <ng-container
-            *ngIf="ageCalculateFormGroup.get(['month'])?.invalid && (ageCalculateFormGroup.get(['month'])?.dirty || ageCalculateFormGroup.get(['month'])?.touched)">
-            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('required')">
-              <small>This field is required.</small>
-            </div>
-            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('min')">
-              <small>Must be a valid month!</small>
-            </div>
-            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['month'])?.hasError('max')">
-              <small>Must be a valid month!</small>
-            </div>
-          </ng-container>
-        </div>
+          <input type="number" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (year?.hasError('required') ||
+         year?.hasError('invalidYear'))}" class="form-control  text-box" formControlName="year">
+         
+         <ng-container *ngIf="year?.invalid && (year?.dirty || year?.touched)">
 
-        <div class="col-md-1">
-          <input type="number" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (ageCalculateFormGroup.get(['year'])?.hasError('required') ||
-         ageCalculateFormGroup.get(['year'])?.hasError('invalidYear'))}" class="form-control  text-box"
-            formControlName="year">
-          <ng-container
-            *ngIf="ageCalculateFormGroup.get(['year'])?.invalid && (ageCalculateFormGroup.get(['year'])?.dirty || ageCalculateFormGroup.get(['year'])?.touched)">
-            <div class="text-danger" *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('required')">
+            <div class="text-danger" *ngIf="invalidForm && year?.hasError('required')">
               <small>This field is required.</small>
             </div>
-            <div *ngIf="invalidForm && ageCalculateFormGroup.get(['year'])?.hasError('invalidYear')">
+            <div *ngIf="invalidForm && year?.hasError('invalidYear')">
               <small class="text-danger">Must be a valid year!</small>
             </div>
+            
           </ng-container>
         </div>
       </div>
