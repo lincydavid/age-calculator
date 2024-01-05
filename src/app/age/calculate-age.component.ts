@@ -70,7 +70,7 @@ export class CalacAgeComponent {
 
       if (this.ageDays && this.ageMonths && this.ageYears) {
         const today = new Date();
-        const birthDate = new Date(this.ageYears, this.ageMonths - 1, this.ageDays); // Months are zero-based
+        const birthDate = new Date(this.ageYears, this.ageMonths - 1, this.ageDays);
 
         this.ageYears = today.getFullYear() - birthDate.getFullYear();
         this.ageMonths = today.getMonth() - birthDate.getMonth();
