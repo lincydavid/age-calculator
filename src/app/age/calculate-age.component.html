@@ -12,7 +12,7 @@
           <div class="col-md-1"> <label for="year">YEAR</label></div>
         </div>
         <div class="col-md-1">
-          <input type="number" placeholder="DD" id="day" [ngClass]="{'border-danger': invalidForm && (day?.hasError('required') ||
+          <input type="number" min="1" placeholder="DD" id="day" [ngClass]="{'border-danger': invalidForm && (day?.hasError('required') ||
           day?.hasError('min') || day?.hasError('max') ||  day?.hasError('invalidDays'))}"
             class="form-control text-box" formControlName="day">
 
@@ -36,10 +36,10 @@
         </div>
 
         <div class="col-md-1">
-          <input type="number" placeholder="MM" id="month" [ngClass]="{'border-danger': invalidForm && (month?.hasError('required') ||
+          <input type="number" min="1" placeholder="MM" id="month" [ngClass]="{'border-danger': invalidForm && (month?.hasError('required') ||
           month?.hasError('min') || month?.hasError('max'))}" class="form-control  text-box" formControlName="month">
-        
-        <ng-container *ngIf="month?.invalid && (month?.dirty || month?.touched)">
+
+          <ng-container *ngIf="month?.invalid && (month?.dirty || month?.touched)">
 
             <div class="text-danger" *ngIf="invalidForm && month?.hasError('required')">
               <small>This field is required.</small>
@@ -55,10 +55,10 @@
         </div>
 
         <div class="col-md-1">
-          <input type="number" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (year?.hasError('required') ||
+          <input type="number" min="1900" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (year?.hasError('required') ||
          year?.hasError('invalidYear'))}" class="form-control  text-box" formControlName="year">
-         
-         <ng-container *ngIf="year?.invalid && (year?.dirty || year?.touched)">
+
+          <ng-container *ngIf="year?.invalid && (year?.dirty || year?.touched)">
 
             <div class="text-danger" *ngIf="invalidForm && year?.hasError('required')">
               <small>This field is required.</small>
@@ -66,7 +66,7 @@
             <div *ngIf="invalidForm && year?.hasError('invalidYear')">
               <small class="text-danger">Must be a valid year!</small>
             </div>
-            
+
           </ng-container>
         </div>
       </div>

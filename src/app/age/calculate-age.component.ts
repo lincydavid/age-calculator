@@ -47,7 +47,6 @@ export class CalacAgeComponent {
     return this.formGroup.get(['year']);
   }
 
-
   yearValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const currentYear = new Date().getFullYear();
     const enteredYear = control.value;
@@ -94,6 +93,9 @@ export class CalacAgeComponent {
       }
     } else {
       this.invalidForm = true;
+      this.ageYears = 0;
+        this.ageMonths = 0;
+        this.ageDays = 0;
     }
   }
 }
