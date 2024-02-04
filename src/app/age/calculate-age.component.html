@@ -1,115 +1,91 @@
-<html>
+<form [formGroup]="formGroup">
 
-<head>Age Calculator</head>
-
-<body>
-  <form [formGroup]="formGroup" class="form-horizontal">
-    <div class="row px-2 py-2">
-      <div class="row mb-2 px-5 py-4">
-        <div class="row head-font">
-          <div class="col-md-1"> <label for="day">DAY</label></div>
-          <div class="col-md-1"><label for="month">MONTH</label></div>
-          <div class="col-md-1"> <label for="year">YEAR</label></div>
-        </div>
-        <div class="col-md-1">
-          <input type="number" min="1" placeholder="DD" id="day" [ngClass]="{'border-danger': invalidForm && (day?.hasError('required') ||
+    <div class="row mb-2">
+      <div class="col-md-2">
+        <label for="day">DAY</label>
+        <input type="number" min="1" placeholder="DD" id="day" [ngClass]="{'border-danger': invalidForm && (day?.hasError('required') ||
           day?.hasError('min') || day?.hasError('max') ||  day?.hasError('invalidDays'))}"
-            class="form-control text-box" formControlName="day">
+          class="form-control" formControlName="day">
 
-          <ng-container *ngIf="day?.invalid && (day?.dirty || day?.touched)">
-
-            <div *ngIf="invalidForm && day?.hasError('required')">
-              <small class="text-danger">This field is required.</small>
-            </div>
-            <div *ngIf="invalidForm && day?.hasError('min')">
-              <small class="text-danger">Must be a valid day!</small>
-            </div>
-            <div *ngIf="invalidForm && day?.hasError('max')">
-              <small class="text-danger">Must be a valid day!</small>
-            </div>
-            <div *ngIf="invalidForm && day?.hasError('invalidDays')">
-              <small class="text-danger">Must be a valid day!</small>
-            </div>
-
-          </ng-container>
-
-        </div>
-
-        <div class="col-md-1">
-          <input type="number" min="1" placeholder="MM" id="month" [ngClass]="{'border-danger': invalidForm && (month?.hasError('required') ||
-          month?.hasError('min') || month?.hasError('max'))}" class="form-control  text-box" formControlName="month">
-
-          <ng-container *ngIf="month?.invalid && (month?.dirty || month?.touched)">
-
-            <div class="text-danger" *ngIf="invalidForm && month?.hasError('required')">
-              <small>This field is required.</small>
-            </div>
-            <div class="text-danger" *ngIf="invalidForm && month?.hasError('min')">
-              <small>Must be a valid month!</small>
-            </div>
-            <div class="text-danger" *ngIf="invalidForm && month?.hasError('max')">
-              <small>Must be a valid month!</small>
-            </div>
-
-          </ng-container>
-        </div>
-
-        <div class="col-md-1">
-          <input type="number" min="1900" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (year?.hasError('required') ||
-         year?.hasError('invalidYear'))}" class="form-control  text-box" formControlName="year">
-
-          <ng-container *ngIf="year?.invalid && (year?.dirty || year?.touched)">
-
-            <div class="text-danger" *ngIf="invalidForm && year?.hasError('required')">
-              <small>This field is required.</small>
-            </div>
-            <div *ngIf="invalidForm && year?.hasError('invalidYear')">
-              <small class="text-danger">Must be a valid year!</small>
-            </div>
-
-          </ng-container>
-        </div>
-      </div>
-      <div class="row button-align">
-        <div class="col-md-4">
-          <div>
-            <ng-container *ngIf="invalidForm">
-              <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"
-                (click)="onSubmit()">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M1.46449 59.4727C-5.01549 34.5937 10.6356 8.3517 36.0266 1.5237C52.5095 -2.9093 70.6646 2.50671 82.7976 15.4767C89.2335 22.3567 92.0575 27.4617 94.3715 36.4027C100.835 61.3682 85.4536 87.2001 60.1047 94.2151C56.2121 95.2341 52.1266 95.7766 47.9145 95.7766C43.5741 95.7766 39.3679 95.2005 35.3689 94.1205C27.0626 91.7799 19.3257 87.1391 13.1335 80.4917C6.73549 73.6247 3.74947 68.2447 1.46449 59.4727ZM46.9145 57.8897V41.9167C46.9145 31.9337 47.2895 25.9427 47.9145 25.9427C48.5385 25.9427 48.9265 32.0467 48.9465 42.1927L48.9775 58.4427L51.0835 55.6187C52.2415 54.0647 54.9335 51.6927 57.0655 50.3477C61.2055 47.7337 69.9145 45.9347 69.9145 47.6937C69.9145 48.2557 67.9225 49.0147 65.4875 49.3797C57.1455 50.6307 50.6025 57.1737 49.3515 65.5157C48.9865 67.9507 48.3395 69.9427 47.9145 69.9427C47.4895 69.9427 46.8425 67.9507 46.4775 65.5157C45.2265 57.1737 38.6835 50.6307 30.3415 49.3797C25.8305 48.7027 24.1745 46.9427 28.0485 46.9427C32.8385 46.9427 38.5955 49.5827 42.6645 53.6467L46.9145 57.8897Z"
-                  fill="#151515" />
-              </svg>
-            </ng-container>
-            <ng-container *ngIf="!invalidForm">
-              <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"
-                (click)="onSubmit()">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M1.46449 59.4727C-5.01549 34.5937 10.6356 8.3517 36.0266 1.5237C52.5095 -2.9093 70.6646 2.50671 82.7976 15.4767C89.2335 22.3567 92.0575 27.4617 94.3715 36.4027C100.835 61.3682 85.4536 87.2001 60.1047 94.2151C56.2121 95.2341 52.1266 95.7766 47.9145 95.7766C43.5741 95.7766 39.3679 95.2005 35.3689 94.1205C27.0626 91.7799 19.3257 87.1391 13.1335 80.4917C6.73549 73.6247 3.74947 68.2447 1.46449 59.4727ZM46.9145 57.8897V41.9167C46.9145 31.9337 47.2895 25.9427 47.9145 25.9427C48.5385 25.9427 48.9265 32.0467 48.9465 42.1927L48.9775 58.4427L51.0835 55.6187C52.2415 54.0647 54.9335 51.6927 57.0655 50.3477C61.2055 47.7337 69.9145 45.9347 69.9145 47.6937C69.9145 48.2557 67.9225 49.0147 65.4875 49.3797C57.1455 50.6307 50.6025 57.1737 49.3515 65.5157C48.9865 67.9507 48.3395 69.9427 47.9145 69.9427C47.4895 69.9427 46.8425 67.9507 46.4775 65.5157C45.2265 57.1737 38.6835 50.6307 30.3415 49.3797C25.8305 48.7027 24.1745 46.9427 28.0485 46.9427C32.8385 46.9427 38.5955 49.5827 42.6645 53.6467L46.9145 57.8897Z"
-                  fill="#8650fe" />
-              </svg>
-            </ng-container>
-            <div class="simple-line"></div>
+        <ng-container *ngIf="day?.invalid && (day?.dirty || day?.touched)">
+          <div *ngIf="invalidForm && day?.hasError('required')">
+            <small class="text-danger">This field is required.</small>
           </div>
-        </div>
-      </div>
-      <div class="row-parent px-5 py-4">
-        <div class="col-md-12">
-          <label class="myColor"><strong>{{ageYears ? ageYears : '--'}}</strong></label>
-          <strong>{{' '+ 'years'}}</strong>
-        </div>
-        <div class="col-md-12">
-          <label class="myColor"> <strong>{{ageMonths ? ageMonths :'--'}}</strong></label>
-          <strong>{{' '+'months'}}</strong>
-        </div>
-        <div class="col-md-12">
-          <label class="myColor"><strong>{{ageDays ? ageDays : '--' }}</strong></label>
-          <strong>{{' '+ 'days'}}</strong>
-        </div>
+          <div *ngIf="invalidForm && day?.hasError('min')">
+            <small class="text-danger">Must be a valid day!</small>
+          </div>
+          <div *ngIf="invalidForm && day?.hasError('max')">
+            <small class="text-danger">Must be a valid day!</small>
+          </div>
+          <div *ngIf="invalidForm && day?.hasError('invalidDays')">
+            <small class="text-danger">Must be a valid day!</small>
+          </div>
+        </ng-container>
+
       </div>
 
+      <div class="col-md-2">
+        <label for="month">MONTH</label>
+        <input type="number" min="1" placeholder="MM" id="month" [ngClass]="{'border-danger': invalidForm && (month?.hasError('required') ||
+          month?.hasError('min') || month?.hasError('max'))}" class="form-control" formControlName="month">
+
+        <ng-container *ngIf="month?.invalid && (month?.dirty || month?.touched)">
+          <div class="text-danger" *ngIf="invalidForm && month?.hasError('required')">
+            <small>This field is required.</small>
+          </div>
+          <div class="text-danger" *ngIf="invalidForm && month?.hasError('min')">
+            <small>Must be a valid month!</small>
+          </div>
+          <div class="text-danger" *ngIf="invalidForm && month?.hasError('max')">
+            <small>Must be a valid month!</small>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="col-md-2">
+        <label for="year">YEAR</label>
+        <input type="number" min="1900" placeholder="YYYY" id="year" [ngClass]="{'border-danger': invalidForm && (year?.hasError('required') ||
+         year?.hasError('invalidYear'))}" class="form-control" formControlName="year">
+
+        <ng-container *ngIf="year?.invalid && (year?.dirty || year?.touched)">
+          <div class="text-danger" *ngIf="invalidForm && year?.hasError('required')">
+            <small>This field is required.</small>
+          </div>
+          <div *ngIf="invalidForm && year?.hasError('invalidYear')">
+            <small class="text-danger">Must be a valid year!</small>
+          </div>
+        </ng-container>
+      </div>
     </div>
-  </form>
-</body>
 
-</html>
+    <div class="row button-align">
+      <div class="col-md-8 cursor-ponter svg-container">
+        <svg (click)="onSubmit()" width="96" height="96" viewBox="0 0 96 96" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M1.46449 59.4727C-5.01549 34.5937 10.6356 8.3517 36.0266 1.5237C52.5095 -2.9093 70.6646 2.50671 82.7976 15.4767C89.2335 22.3567 92.0575 27.4617 94.3715 36.4027C100.835 61.3682 85.4536 87.2001 60.1047 94.2151C56.2121 95.2341 52.1266 95.7766 47.9145 95.7766C43.5741 95.7766 39.3679 95.2005 35.3689 94.1205C27.0626 91.7799 19.3257 87.1391 13.1335 80.4917C6.73549 73.6247 3.74947 68.2447 1.46449 59.4727ZM46.9145 57.8897V41.9167C46.9145 31.9337 47.2895 25.9427 47.9145 25.9427C48.5385 25.9427 48.9265 32.0467 48.9465 42.1927L48.9775 58.4427L51.0835 55.6187C52.2415 54.0647 54.9335 51.6927 57.0655 50.3477C61.2055 47.7337 69.9145 45.9347 69.9145 47.6937C69.9145 48.2557 67.9225 49.0147 65.4875 49.3797C57.1455 50.6307 50.6025 57.1737 49.3515 65.5157C48.9865 67.9507 48.3395 69.9427 47.9145 69.9427C47.4895 69.9427 46.8425 67.9507 46.4775 65.5157C45.2265 57.1737 38.6835 50.6307 30.3415 49.3797C25.8305 48.7027 24.1745 46.9427 28.0485 46.9427C32.8385 46.9427 38.5955 49.5827 42.6645 53.6467L46.9145 57.8897Z"
+            fill="#8650fe" [ngClass]="{ 'fill-invalid': invalidForm }" />
+        </svg>
+        <div class="line"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 display-font">
+        <label class="displayColor"><strong>{{ageYears ? ageYears : '--'}}</strong></label>
+        <strong>{{' '+ 'years'}}</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 display-font">
+        <label class="displayColor"> <strong>{{ageMonths ? ageMonths :'--'}}</strong></label>
+        <strong>{{' '+'months'}}</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 display-font">
+        <label class="displayColor"><strong>{{ageDays ? ageDays : '--' }}</strong></label>
+        <strong>{{' '+ 'days'}}</strong>
+      </div>
+    </div>
+</form>

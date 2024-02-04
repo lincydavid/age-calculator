@@ -20,7 +20,6 @@ export class CalacAgeComponent {
   daysToValidate: number | undefined;
 
   constructor(private fb: FormBuilder) {
-
     this.invalidForm = false
     this.formGroup = this.fb.group(
       {
